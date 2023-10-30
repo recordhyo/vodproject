@@ -41,8 +41,17 @@ INSTALLED_APPS = [
     "contents",
     "rest_framework",
     'rest_framework_simplejwt',
-    "bcrypt",
-
+    # allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # allauth - google
+    'allauth.socialaccount.providers.google',
+    # allauth - naver
+    'allauth.socialaccount.providers.naver',
+    # allauth - kakao
+    'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = "vodproject.urls"
@@ -106,6 +116,36 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# allauth site_id
+SITE_ID = 3
+
+# 로그인 후 리디렉션할 페이지
+LOGIN_REDIRECT_URL = '/'
+# 로그아웃 후 리디렉션할 페이지
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+# 로그아웃 버튼 클릭 시 자동 로그아웃
+ACCOUNT_LOGOUT_ON_GET = True
+
+AUTHENTICATION_BACKENDS = (
+    # 'allauth' specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+    # Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

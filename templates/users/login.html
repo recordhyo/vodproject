@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% load socialaccount %}
+</form><form action="{% provider_login_url 'kakao' %}" method='post'>
+  {% csrf_token %}
+  <button>Kakao Login</button>
+</form>
+</form><form action="{% provider_login_url 'naver' %}" method='post'>
+  {% csrf_token %}
+  <button>Naver Login</button>
+</form>
+<form action="{% provider_login_url 'google' %}" method='post'>
+  {% csrf_token %}
+  <button>Google Login</button>
+</form>
+</body>
+</html>

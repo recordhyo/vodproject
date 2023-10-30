@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import userSignup
+from .views import userSignup, simple_view
 
 urlpatterns = [
-    # example/hello 요청이 오면 helloAPI 함수가 처리
-    path("signup", userSignup)
+    # users/signup 요청이 오면 userSignup 함수가 처리
+    path("signup", userSignup),
+    path('', simple_view)
 ]
